@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This script allows you run Nginx as the nginx user
+
+sudo systemctl stop nginx
+
+usermod -u 101 -d /usr/share/nginx -s /sbin/nologin nginx
+
+chown -R nginx:nginx /var/log/nginx
+chown -R nginx:nginx /var/cache/nginx
+
+sed -i '/^\s*user /s/user .*/user nginx;/' /etc/nginx/nginx.conf
+sed -i '/^\s*listen /s/listen .*/listen 8080 default_server;/' /etc/nginx/nginx.conf
+
+sudo systemctl start nginx
