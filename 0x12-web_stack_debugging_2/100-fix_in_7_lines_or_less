@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-sudo apt update
+# fix in 7 lines or less
 sudo apt-get install -y nginx
 sed -i 's/80 default_server/8080 default_server/g' /etc/nginx/sites-available/default
 usermod -aG www-data nginx
